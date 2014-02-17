@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+
+require 'dada'
+require 'optparse'
+require 'ostruct'
+
+class DADAOpts
+  def self.parse(args)
+    options = OpenStruct.new
+    options.key = ENV['STEAM_WEB_API_KEY']
+    options.matches = '5'
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = 'Usage: dada command [arguments] [options]'
+
+      opts.on('-k', '--key [KEY]', 'Steam Web API Key to use') do |key|
+        options.key = key
+      end
+
+      opts.on('-n', '--matches [N]', 'Number of matches to retreive') do |n|
+        options.matches = n
+      end
+
+      opts.on_tail('-h', '--help', 'Show this message') do
+        puts help
+        exit
+      end
+    end
+
+    opt_parser.parse!(args)
+    options
+  end
+
+  def self.help
+    "Dota Ability Draft Analyzer is here to help you.\n\n"\
+    "  Usage:\n"\
+    "    dada command [arguments...] [options...]\n\n"\
+    "  Commands:\n"\
+    "    dada match <MATCH_ID>                  show ability upgrades for match MATCH_ID\n"\
+    "    dada account <ACCOUNT_ID>              show details about last 5 matches for ACCOUNT_ID\n"\
+    "    dada account <ACCOUNT_ID> --num [N]    show details about last N matches for ACCOUNT_ID\n"\
+    "    dada help                              display this message\n\n"\
+    "  Further information:\n"\
+    "    http://ngscheurich.github.com/dada"
+  end
+end
+
+def error(what)
+  "Error: Missing #{what}\n\n  dada help can show you the way"
+end
+
+opt = DADAOpts.parse(ARGV)
+
+if ARGV.empty? || ARGV[0] == 'help'
+  puts DADAOpts.help
+elsif opt.key.nil?
+  puts error('Steam Web API Key')
+else
+  com = ARGV[0]
+  arg = ARGV[1]
+
+  #puts 'options: ' + opt.inspect
+  #puts 'command: ' + com
+  #puts 'argument: ' + arg
+
+  case com
+  when 'account'
+    out = arg.nil? ? error('account') : DADA.matches(opt.key, arg, opt.matches)
+  when 'match'
+    out = arg.nil? ? error('match') : DADA.abilities(opt.key, arg)
+  end
+
+  puts out
+end
