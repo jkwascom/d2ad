@@ -71,7 +71,7 @@ Thanks
 License
 -------
 
-This project is licensed under [The MIT License (MIT)](http://opensource.org/licenses/MIT).
+This project is licensed under [The MIT License (MIT)](https://raw.github.com/ngscheurich/dada/master/LICENSE).
 
 Legal
 -----
