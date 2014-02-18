@@ -1,5 +1,5 @@
-module DADA
-  require 'dada/dota-api'
+module D2AD
+  require 'd2ad/dota-api'
   require 'date'
   require 'json'
 
@@ -10,15 +10,13 @@ module DADA
   end
 
   def self.abilities(api_key, match_id)
-    a_uri = 'https://raw.github.com/kronusme/dota2-api/master/data/abilities.json'
-    a_data = JSON.parse(Net::HTTP.get(URI(a_uri)))
+    abilities = JSON.parse(File.read('lib/d2ad/abilities.json'))
+    match_details = JSON.parse(DotaAPI.query(api_key, 'GetMatchDetails', { match_id: match_id }))
 
-    m_data = JSON.parse(DotaAPI.query(api_key, 'GetMatchDetails', { match_id: match_id }))
-
-    m_data['result']['players'].each do |p|
+    match_details['result']['players'].each do |p|
       puts "\naccount_id: #{p['account_id']}"
       p['ability_upgrades'].each do |u|
-        a_data['abilities'].each do |a|
+        abilities['abilities'].each do |a|
           puts "  #{u['level'].to_s.rjust(2)}: #{a['name']}" if u['ability'].to_s == a['id']
         end
       end

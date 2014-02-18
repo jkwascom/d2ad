@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
 
-require 'dada'
+require 'd2ad'
 require 'optparse'
 require 'ostruct'
 
-class DADAOpts
+class D2ADOpts
   def self.parse(args)
     options = OpenStruct.new
     options.key = ENV['STEAM_WEB_API_KEY']
     options.matches = '5'
 
     opt_parser = OptionParser.new do |opts|
-      opts.banner = 'Usage: dada command [arguments] [options]'
+      opts.banner = 'Usage: d2ad command [arguments] [options]'
 
       opts.on('-k', '--key [KEY]', 'Steam Web API Key to use') do |key|
         options.key = key
@@ -34,25 +34,25 @@ class DADAOpts
   def self.help
     "Dota Ability Draft Analyzer is here to help you.\n\n"\
     "  Usage:\n"\
-    "    dada command [arguments...] [options...]\n\n"\
+    "    d2ad command [arguments...] [options...]\n\n"\
     "  Commands:\n"\
-    "    dada match <MATCH_ID>                  show ability upgrades for match MATCH_ID\n"\
-    "    dada account <ACCOUNT_ID>              show details about last 5 matches for ACCOUNT_ID\n"\
-    "    dada account <ACCOUNT_ID> --num [N]    show details about last N matches for ACCOUNT_ID\n"\
-    "    dada help                              display this message\n\n"\
+    "    d2ad match <MATCH_ID>                  show ability upgrades for match MATCH_ID\n"\
+    "    d2ad account <ACCOUNT_ID>              show details about last 5 matches for ACCOUNT_ID\n"\
+    "    d2ad account <ACCOUNT_ID> --num [N]    show details about last N matches for ACCOUNT_ID\n"\
+    "    d2ad help                              display this message\n\n"\
     "  Further information:\n"\
-    "    http://ngscheurich.github.com/dada"
+    "    http://ngscheurich.github.com/d2ad"
   end
 end
 
 def error(what)
-  "Error: Missing #{what}\n\n  dada help can show you the way"
+  "Error: Missing #{what}\n\n  d2ad help can show you the way"
 end
 
-opt = DADAOpts.parse(ARGV)
+opt = D2ADOpts.parse(ARGV)
 
 if ARGV.empty? || ARGV[0] == 'help'
-  puts DADAOpts.help
+  puts D2ADOpts.help
 elsif opt.key.nil?
   puts error('Steam Web API Key')
 else
@@ -65,9 +65,9 @@ else
 
   case com
   when 'account'
-    out = arg.nil? ? error('account') : DADA.matches(opt.key, arg, opt.matches)
+    out = arg.nil? ? error('account') : D2AD.matches(opt.key, arg, opt.matches)
   when 'match'
-    out = arg.nil? ? error('match') : DADA.abilities(opt.key, arg)
+    out = arg.nil? ? error('match') : D2AD.abilities(opt.key, arg)
   end
 
   puts out
