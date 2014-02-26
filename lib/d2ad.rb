@@ -10,7 +10,9 @@ module D2AD
   end
 
   def self.abilities(api_key, match_id)
-    abilities = JSON.parse(File.read('lib/d2ad/abilities.json'))
+    #this assumes we're being called from a script in the 'bin' directory of this gem
+    gem_dir = Dir.getwd.chomp('/bin')
+    abilities = JSON.parse(File.read(gem_dir + '/lib/d2ad/abilities.json'))
     match_details = JSON.parse(DotaAPI.query(api_key, 'GetMatchDetails', { match_id: match_id }))
 
     match_details['result']['players'].each do |p|
