@@ -32,7 +32,7 @@ class D2ADOpts
   end
 
   def self.help
-    "Dota Ability Draft Analyzer is here to help you.\n\n"\
+    "Dota 2 Ability Draft Analyzer is here to help you.\n\n"\
     "  Usage:\n"\
     "    d2ad command [arguments...] [options...]\n\n"\
     "  Commands:\n"\

@@ -33,8 +33,8 @@ $ d2ad account <ACCOUNT_ID>
 
 Ugh, _another_ ID? Yeah, I’m afraid so… Thankfully there’s an easy way to
 snag this one—it’s the number on the end of your
-[DOTABUFF](http://dotabuff.com/) profile URL. If you’re a Dota 2 player
-and aren't using DOTABUFF, you should go check it out and come back to
+[Dotabuff](http://dotabuff.com/) profile URL. If you’re a Dota 2 player
+and aren't using Dotabuff, you should go check it out and come back to
 this later.
 
 You can always check the help for all the nitty-gritty:
@@ -60,7 +60,7 @@ $ export STEAM_WEB_API_KEY=WHATEVER_YOUR_KEY_IS
 You’ll most likely want to add this to your shell's config file if you plan to use D2AD frequently. If you'd prefer to not mess with an environment variable, simply pass the key along as an option when you run a D2AD command:
 
 ````bash
-$ d2ad match 514604875 --key WHATEVER_YOU_KEY_IS
+$ d2ad match 514604875 --key WHATEVER_YOUR_KEY_IS
 ````
 
 Thanks
