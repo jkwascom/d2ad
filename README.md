@@ -33,8 +33,8 @@ $ d2ad account <ACCOUNT_ID>
 
 Ugh, _another_ ID? Yeah, I’m afraid so… Thankfully there’s an easy way to
 snag this one—it’s the number on the end of your
-[DOTABUFF](http://dotabuff.com/) profile URL. If you’re a Dota 2 player
-and aren't using DOTABUFF, you should go check it out and come back to
+[Dotabuff](http://dotabuff.com/) profile URL. If you’re a Dota 2 player
+and aren't using Dotabuff, you should go check it out and come back to
 this later.
 
 You can always check the help for all the nitty-gritty:
